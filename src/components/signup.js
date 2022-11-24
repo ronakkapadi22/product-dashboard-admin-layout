@@ -17,7 +17,7 @@ const useSignup = (otherData) => {
     const handleChange = e => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
-        setFormError({ ...formError, [name]: validation(name, value) })
+        setFormError({ ...formError, [name]: validation(name, value, formData) })
     }
 
     const initialFormData = [

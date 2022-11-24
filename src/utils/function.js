@@ -11,3 +11,5 @@ export const retry = (fn, retriesLeft = 5, interval = 1000) => {
         });
     });
 }
+
+export const classNames = (...classes) => classes.filter(Boolean).join(' ')

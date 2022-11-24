@@ -4,6 +4,7 @@ import Button from '../common/Forms/Button'
 import Form from '../common/Forms/Form'
 import Input from '../common/Forms/Input'
 import useSignup from '../components/signup'
+import Logo from './Logo'
 
 const Signup = ({ ...props }) => {
     const { handleSubmit, initialFormData } = useSignup()
@@ -16,7 +17,8 @@ const Signup = ({ ...props }) => {
                     src="./assets/register.svg"
                 />
             </div>
-            <div className="w-full h-full px-6 sm:p-0 md:p-2 lg:p-6 xl:p-8 2xl:p-0 flex justify-center items-center">
+            <div className="relative w-full h-full px-6 sm:p-0 md:p-2 lg:p-6 xl:p-8 2xl:p-0 flex justify-center items-center">
+                <Logo redirect className="absolute top-[24px] left-[24px] flex justify-center items-center" />
                 <div className="container">
                     {/* <h1 className='text-center title-font font-medium text-3xl text-indigo-500 mb-3' >Register</h1> */}
                     <img

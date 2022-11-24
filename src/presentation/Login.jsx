@@ -4,13 +4,15 @@ import Button from '../common/Forms/Button'
 import Form from '../common/Forms/Form'
 import Input from '../common/Forms/Input'
 import useLogin from '../components/login'
+import Logo from './Logo'
 
 const Login = ({ ...props }) => {
     const { handleSubmit, initialFormData } = useLogin()
     return (
         <section {...props} className="relative flex h-screen">
-            <div className="w-full h-full p-6 sm:p-8 md:p-2 lg:p-16 xl:p-16 2xl:p-0 flex justify-center items-center">
+            <div className="relative w-full h-full p-6 sm:p-8 md:p-2 lg:p-16 xl:p-16 2xl:p-0 flex justify-center items-center">
                 <div className="container">
+                    <Logo redirect className="absolute top-[24px] left-[24px] flex justify-center items-center" />
                     <img
                         src="./assets/welcome.svg"
                         alt="welcome"
@@ -30,7 +32,7 @@ const Login = ({ ...props }) => {
                             />
                         ))}
                         <span className="float-right mb-2 mt-8 text-sm cursor-pointer font-medium">
-                            Forgot password?
+                            <NavLink to="/forgot-password" >Forgot password?</NavLink>
                         </span>
                         <Button
                             className="text-white w-full bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"

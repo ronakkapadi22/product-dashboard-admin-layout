@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Button = ({label, handleClick, ...props}) => {
+const Button = ({label, children, handleClick, ...props}) => {
   return (
-    <button {...props} onClick={(handleClick && handleClick())} >
-        {label}
+    <button {...props} onClick={handleClick} >
+        {children || label}
     </button>
   )
 }

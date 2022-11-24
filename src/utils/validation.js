@@ -1,6 +1,6 @@
 import { emailRegex } from "../constant"
 
-export const validation = (name, value) => {
+export const validation = (name, value, data) => {
     switch (name) {
         case 'username':
             if (!value || !value.trim() === "") {
@@ -25,8 +25,8 @@ export const validation = (name, value) => {
         case 'confirm_password':
             if (!value || !value.trim() === "") {
                 return "Confirm password is required."
-            } else if (value.length < 8 || value.length > 16) {
-                return "Confirm password must be 8-16 characters."
+            } else if (value !== data['password']) {
+                return "Confirm password doesn't matched."
             } else return null
         default: return null
     }
