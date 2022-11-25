@@ -1,36 +1,27 @@
 import { Popover, Transition } from '@headlessui/react'
-import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
+import Logo from '../presentation/Logo'
 import Button from './Forms/Button'
+import Badge from './utilities/Badge'
 
-const ProductHeader = ({setOpen, navigation, classNames}) => {
+const ProductHeader = ({ setOpen, isLoggedIn, navigation, classNames }) => {
     return (
         <header className="relative bg-white">
             <nav aria-label="Top" className="mx-auto w-full px-4 sm:px-6 lg:px-8">
                 <div className="border-b border-gray-200">
                     <div className="flex h-16 items-center">
-                        <Button
-                            type="button"
-                            className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
-                            handleClick={() => setOpen(true)}
-                        >
-                            <span className="sr-only">Open menu</span>
+                        <Button className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                            handleClick={() => setOpen(true)} >
                             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                         </Button>
 
                         {/* Logo */}
                         <div className="ml-4 flex lg:ml-0">
-                            <NavLink to='/'>
-                                <span className="sr-only">Your Company</span>
-                                <img
-                                    className="h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                    alt=""
-                                />
-                            </NavLink>
+                            <Logo redirect name="logo" logoClassName="h-8 w-auto" />
                         </div>
 
                         {/* Flyout menus */}
@@ -46,7 +37,7 @@ const ProductHeader = ({setOpen, navigation, classNames}) => {
                                                             open
                                                                 ? 'border-indigo-600 text-indigo-600'
                                                                 : 'border-transparent text-gray-700 hover:text-gray-800',
-                                                            'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
+                                                            'outline-none relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                                                         )}
                                                     >
                                                         {category.name}
@@ -62,7 +53,7 @@ const ProductHeader = ({setOpen, navigation, classNames}) => {
                                                     leaveFrom="opacity-100"
                                                     leaveTo="opacity-0"
                                                 >
-                                                    <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                                                    <Popover.Panel className="z-40 absolute inset-x-0 top-full text-sm text-gray-500">
                                                         {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                                                         <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
 
@@ -121,14 +112,11 @@ const ProductHeader = ({setOpen, navigation, classNames}) => {
                                 ))}
 
                                 {navigation.pages.map((page) => (
-                                    <NavLink
-                                        key={page.name}
-                                        to={page.href}
-                                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                                    >
+                                    <NavLink key={page.name} to={page.href} className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800" >
                                         {page.name}
                                     </NavLink>
                                 ))}
+
                             </div>
                         </Popover.Group>
 
@@ -144,28 +132,23 @@ const ProductHeader = ({setOpen, navigation, classNames}) => {
                             </div>
 
                             <div className="hidden lg:ml-8 lg:flex">
-                                <span className="flex items-center text-gray-700 hover:text-gray-800">
-                                    <img
-                                        src="https://countryflagsapi.com/png/in"
-                                        alt="flag"
-                                        className="block h-auto w-5 flex-shrink-0"
-                                    />
+                                <div className="flex items-center text-gray-700 hover:text-gray-800">
+                                    <img className="block h-auto w-5 flex-shrink-0" src="https://countryflagsapi.com/png/in" alt="flag" />
                                     <span className="ml-3 block text-sm font-medium">INR</span>
-                                    <span className="sr-only">, change currency</span>
-                                </span>
+                                </div>
                             </div>
 
                             {/* Search */}
                             <div className="flex lg:ml-6 p-2 text-gray-400 hover:text-gray-500">
-                                    <span className="sr-only">Search</span>
-                                    <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                             </div>
 
                             {/* Cart */}
                             <div className="ml-4 flow-root lg:ml-6">
-                                <NavLink className="flex" to="/add-to-cart">
+                                {isLoggedIn ? <UserCircleIcon className="text-indigo-500 h-8 w-8" aria-hidden="true" /> : <NavLink className="flex relative" to="/add-to-cart/04">
                                     <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                                </NavLink>
+                                    <Badge className="absolute px-1.5 text-[12px] -right-[8px] -top-[4px] text-center font-bold bg-red-600 text-white rounded-full" {...{ count: 1, type: 'count' }} />
+                                </NavLink>}
                             </div>
                         </div>
                     </div>

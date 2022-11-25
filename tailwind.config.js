@@ -21,6 +21,10 @@ module.exports = {
       screens: {
         "xs": "375px"
       },
+      inset: {
+        '4px': '-4px',
+        '8px': '-8px',
+      },
       animation: {
         'bounce-slow': 'up_down 1500ms linear infinite',
       },

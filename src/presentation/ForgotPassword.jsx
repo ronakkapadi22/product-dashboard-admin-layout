@@ -4,6 +4,7 @@ import Button from '../common/Forms/Button'
 import Form from '../common/Forms/Form'
 import Input from '../common/Forms/Input'
 import useForgotPassword from '../components/forgotPassword'
+import Logo from './Logo'
 
 const ForgotPassword = ({ ...props }) => {
 
@@ -18,7 +19,8 @@ const ForgotPassword = ({ ...props }) => {
                     src="./assets/forgot.svg"
                 />
             </div>
-            <div className="w-full h-full p-6 sm:p-8 md:p-2 lg:p-16 xl:p-16 2xl:p-0 flex justify-center items-center">
+            <div className="relative w-full h-full p-6 sm:p-8 md:p-2 lg:p-16 xl:p-16 2xl:p-0 flex justify-center items-center">
+                <Logo redirect className="absolute top-[24px] left-[24px] flex justify-center items-center" />
                 <div className="container">
                     <img
                         src="./assets/welcome.svg"

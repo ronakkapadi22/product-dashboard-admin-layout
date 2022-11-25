@@ -1,9 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { roles } from '../constant'
 import AuthLayout from '../presentation/layout/AuthLayout'
+import PrivateLayout from '../presentation/layout/PrivateLayout'
 import PublicLayout from '../presentation/layout/PublicLayout'
 import NotFound from '../presentation/NotFound'
-import { authRoutes, publicRoutes } from './routes'
+import { authRoutes, publicRoutes, userPrivateRoutes } from './routes'
 
 const Routing = ({ isLoggedIn, ...props }) => {
   return (
@@ -13,6 +15,9 @@ const Routing = ({ isLoggedIn, ...props }) => {
       </Route>
       <Route path='/' element={<AuthLayout isLoggedIn={isLoggedIn} />} >
         {authRoutes(true).map(({ id, ...otherProps }) => <Route index key={id} {...otherProps} />)}
+      </Route>
+      <Route path='/' element={<PrivateLayout isLoggedIn={isLoggedIn} />} >
+        {userPrivateRoutes(roles['user']).map(({ id, ...otherProps }) => <Route index key={id} {...otherProps} />)}
       </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>
