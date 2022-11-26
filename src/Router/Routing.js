@@ -7,16 +7,17 @@ import PublicLayout from '../presentation/layout/PublicLayout'
 import NotFound from '../presentation/NotFound'
 import { authRoutes, publicRoutes, userPrivateRoutes } from './routes'
 
-const Routing = ({ isLoggedIn, ...props }) => {
+const Routing = ({ ...props }) => {
+
   return (
     <Routes {...props} >
       <Route path='/' element={<PublicLayout isDefaultAccess />} >
         {publicRoutes(true).map(({ id, ...otherProps }) => <Route index key={id} {...otherProps} />)}
       </Route>
-      <Route path='/' element={<AuthLayout isLoggedIn={isLoggedIn} />} >
+      <Route path='/' element={<AuthLayout />} >
         {authRoutes(true).map(({ id, ...otherProps }) => <Route index key={id} {...otherProps} />)}
       </Route>
-      <Route path='/' element={<PrivateLayout isLoggedIn={isLoggedIn} />} >
+      <Route path='/' element={<PrivateLayout />} >
         {userPrivateRoutes(roles['user']).map(({ id, ...otherProps }) => <Route index key={id} {...otherProps} />)}
       </Route>
       <Route path='*' element={<NotFound />} />

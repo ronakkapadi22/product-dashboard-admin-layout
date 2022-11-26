@@ -6,17 +6,3 @@ export const setLoggedUser = (payload) => {
         payload
     }
 }
-
-export const getToken = (payload) => {
-    return {
-        type: constant.TOKEN,
-        payload,
-    }
-}
-
-export const isUserLoggedIn = (payload) => {
-    return {
-        type: constant.IS_LOGGED_IN,
-        payload,
-    }
-}

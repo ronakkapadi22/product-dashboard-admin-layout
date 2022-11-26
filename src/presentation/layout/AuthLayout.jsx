@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
+import withAuthRoutes from '../../hoc/withAuthRoutes'
 
-const AuthLayout = ({ isLoggedIn, ...props }) => {
-    return !isLoggedIn ? <Outlet {...props} /> : <Navigate to='/' replace />
-}
-
+const AuthLayout = ({ isLoggedIn, ...props }) => <WithAuthOutlet {...props} replace {...{ to: '/' }} />
 export default AuthLayout
+
+const WithAuthOutlet = withAuthRoutes(Outlet, Navigate)

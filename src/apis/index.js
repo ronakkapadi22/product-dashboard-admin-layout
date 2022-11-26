@@ -1,6 +1,6 @@
 import axios from "axios"
 import { clearLocalStorage } from "../utils/localstorage";
-// import { handleLogout } from "../utils/functions";
+import { handleLogout } from "../utils/function";
 
 const instance = axios.create({
     baseURL: `${process.env.REACT_APP_API_SERVER_URL}`,
@@ -25,8 +25,8 @@ instance.interceptors.response.use(
         if (
             [401, 402, 403].includes(error.response.status)
         ) {
-            //handleLogout()
             clearLocalStorage()
+            handleLogout()
         }
         return Promise.reject(error)
     }
