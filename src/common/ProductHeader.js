@@ -1,5 +1,5 @@
 import { Popover, Transition } from '@headlessui/react'
-import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React, { Fragment } from 'react'
@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom'
 import Logo from '../presentation/Logo'
 import Button from './Forms/Button'
 import Badge from './utilities/Badge'
+import ProfileSection from './utilities/ProfileSection'
 
 const ProductHeader = ({ setOpen, isLoggedIn, navigation, classNames }) => {
     return (
@@ -21,7 +22,7 @@ const ProductHeader = ({ setOpen, isLoggedIn, navigation, classNames }) => {
 
                         {/* Logo */}
                         <div className="ml-4 flex lg:ml-0">
-                            <Logo redirect name="logo" logoClassName="h-8 w-auto" />
+                            <Logo redirect name="logo" logoClassName="h-8 w-auto cursor-pointer" />
                         </div>
 
                         {/* Flyout menus */}
@@ -121,7 +122,7 @@ const ProductHeader = ({ setOpen, isLoggedIn, navigation, classNames }) => {
                         </Popover.Group>
 
                         <div className="ml-auto flex items-center">
-                            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                            {!isLoggedIn ? <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                                 <NavLink to="/login" href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                                     Sign in
                                 </NavLink>
@@ -129,7 +130,7 @@ const ProductHeader = ({ setOpen, isLoggedIn, navigation, classNames }) => {
                                 <NavLink to="/signup" href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                                     Create account
                                 </NavLink>
-                            </div>
+                            </div> : null}
 
                             <div className="hidden lg:ml-8 lg:flex">
                                 <div className="flex items-center text-gray-700 hover:text-gray-800">
@@ -140,16 +141,20 @@ const ProductHeader = ({ setOpen, isLoggedIn, navigation, classNames }) => {
 
                             {/* Search */}
                             <div className="flex lg:ml-6 p-2 text-gray-400 hover:text-gray-500">
-                                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                                <MagnifyingGlassIcon className="h-6 w-6 cursor-pointer" aria-hidden="true" />
                             </div>
 
                             {/* Cart */}
-                            <div className="ml-4 flow-root lg:ml-6">
-                                {isLoggedIn ? <UserCircleIcon className="text-indigo-500 h-8 w-8" aria-hidden="true" /> : <NavLink className="flex relative" to="/add-to-cart/04">
-                                    <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                            {isLoggedIn ? <div className="flex lg:ml-6 p-2 text-gray-400 hover:text-gray-500">
+                                <NavLink className="flex relative" to="/add-to-cart/04">
+                                    <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500 cursor-pointer" aria-hidden="true" />
                                     <Badge className="absolute px-1.5 text-[12px] -right-[8px] -top-[4px] text-center font-bold bg-red-600 text-white rounded-full" {...{ count: 1, type: 'count' }} />
-                                </NavLink>}
-                            </div>
+                                </NavLink>
+                            </div> : null}
+                            {/* Account */}
+                            {isLoggedIn ? <div className="flex lg:ml-6 p-2 text-indigo-500 hover:text-indigo-700">
+                                <ProfileSection />
+                            </div> : null}
                         </div>
                     </div>
                 </div>
