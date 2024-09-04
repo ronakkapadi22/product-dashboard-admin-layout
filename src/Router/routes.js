@@ -34,24 +34,9 @@ export const route = [
     },
     {
         id: "user_cart_page",
-        path: "/add-to-cart/:id",
-        isPrivate: true,
+        path: "/add-to-cart/1",
+        isAuth: true,
         element: <Cart/>,
-        access: ['user', 'admin', 'manager']
-    },
-    {
-        id: "user",
-        path: "/add-to-cart/:id",
-        isPrivate: true,
-        element: <Cart/>,
-        access: ['user']
-    },
-    {
-        id: "admin",
-        path: "/add-to-cart/:id",
-        isPrivate: true,
-        element: <Cart/>,
-        access: ['admin']
     }
 ]
 
